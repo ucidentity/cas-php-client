@@ -1,12 +1,10 @@
-cas-php-example
----------------
+# cas-php-example
 
 Derived from: https://github.com/apereo/phpCAS/tree/master/docs/examples
 
 This example is not intended for use in production.
 
-Running
-=======
+## Running
 
 ```shell
 docker build --tag=cas-php .
