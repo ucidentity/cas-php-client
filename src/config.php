@@ -11,7 +11,8 @@ $cas_server_ca_cert_path = '/etc/ssl/certs/USERTrust_RSA_Certification_Authority
 
 // Application URL.  CAS server uses this to identify permitted client applications.
 // Change this to production URL (e.g. https://myapp.berkeley.edu)
-$client_service_name = 'http://127.0.0.1:8000';
+// For local development use localhost/127.0.0.1
+$client_service_name = 'http://localhost:8000';
 
 // Client config for cookie hardening
 $client_domain = '127.0.0.1';
