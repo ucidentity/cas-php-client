@@ -8,7 +8,7 @@ This example is not intended for use in production.
 
 ```shell
 docker build --tag=cas-php .
-docker run -p 8000:80 --name=cas-php cas-php
+docker run -p 8000:80 cas-php
 ```
 
 Go to http://localhost:8000
