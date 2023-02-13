@@ -12,6 +12,8 @@ phpCAS::setLogger();
 // Initialize phpCAS
 if ($cas_version == 'saml') {
     phpCAS::client(SAML_VERSION_1_1, $cas_host, $cas_port, $cas_context, $client_service_name);
+} elseif ($cas_version == '1') {
+    phpCAS::client(CAS_VERSION_1_0, $cas_host, $cas_port, $cas_context, $client_service_name);
 } elseif ($cas_version == '2') {
     phpCAS::client(CAS_VERSION_2_0, $cas_host, $cas_port, $cas_context, $client_service_name);
 } else {
@@ -48,9 +50,6 @@ Authentication succeeded for user
 <h3>User Attributes</h3>
 <ul>
 <?php
-foreach (getenv() as $key => $value) {
-    echo $key . ' - ' . $value . ' <br>';
-}
 foreach (phpCAS::getAttributes() as $key => $value) {
     if (is_array($value)) {
         echo '<li>', $key, ':<ol>';
