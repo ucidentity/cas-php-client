@@ -1,4 +1,4 @@
-# cas-php-example
+# cas-php-client
 
 Derived from: https://github.com/apereo/phpCAS/tree/master/docs/examples
 
@@ -21,15 +21,15 @@ CAS_SKIP_SERVER_VALIDATION
 ## Running
 
 ```shell
-git pull https://github.com/ucidentity/cas-php-example
-cd cas-php-example
-docker build --tag=cas-php .
+git pull https://github.com/ucidentity/cas-php-client
+cd cas-php-client
+docker build --tag=cas-php-client .
 ```
 
 With Defaults
 
 ```shell
-docker run -p 8000:80 cas-php
+docker run -p 8000:80 cas-php-client
 ```
 
 With env vars
@@ -43,7 +43,7 @@ docker run --rm \
     --network cas-test \
     --env CAS_VERSION=1 \
     --name cas-client \
-    cas-php
+    cas-php-client
 ```
 
 
