@@ -46,5 +46,4 @@ docker run --rm \
     ghcr.io/ucidentity/cas-php-client:latest 
 ```
 
-
 Go to http://localhost:8000
