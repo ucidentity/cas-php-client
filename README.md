@@ -43,7 +43,7 @@ docker run --rm \
     --network cas-test \
     --env CAS_VERSION=1 \
     --name cas-client \
-    cas-php-client
+    ghcr.io/ucidentity/cas-php-client:latest 
 ```
 
 
