@@ -22,7 +22,7 @@ foreach (getenv() as $key => $value) {
         $cas_context = $value;
     }
     if ($key == 'CAS_PORT') {
-        $cas_port = $value;
+        $cas_port = (int)$value;
     }
     if ($key == 'CAS_SERVER_CA_PATH') {
         $cas_server_ca_cert_path = $value;
