@@ -1,5 +1,5 @@
 {
     "require": {
-        "apereo/phpcas": "1.6.0"
+        "apereo/phpcas": "1.6.1"
     }
 }
