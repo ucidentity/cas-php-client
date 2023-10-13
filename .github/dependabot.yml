@@ -1,6 +1,7 @@
 ---
 version: 2
 updates:
+  # Docker dependencies
   - package-ecosystem: "docker" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
@@ -9,8 +10,20 @@ updates:
       - "jonnyt"
     reviewers:
       - "jonnyt"
+
+  # PHP dependencies
   - package-ecosystem: "composer"
     directory: "/src"
+    schedule:
+      interval: "weekly"
+    assignees:
+      - "jonnyt"
+    reviewers:
+      - "jonnyt"
+
+  # GitHub Actions dependencies
+  - package-ecosystem: "github-actions"
+    directory: "/"
     schedule:
       interval: "weekly"
     assignees:
