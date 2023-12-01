@@ -38,12 +38,28 @@ With env vars
 docker run --rm \
     --publish 8000:80 \
     --env CAS_HOST=cas-host \
+    --env CAS_PORT=8443 \
     --env CLIENT_SERVICE_NAME='http://cas-client:8000' \
     --env CAS_SKIP_SERVER_VALIDATION=true \
     --network cas-test \
-    --env CAS_VERSION=1 \
+    --env CAS_VERSION=3 \
     --name cas-client \
     ghcr.io/ucidentity/cas-php-client:latest 
+```
+
+Another example testing with a hosts file
+
+```shell
+docker run --rm \
+    --publish 80:80 \
+    --add-host=auth-test.berkeley.edu:169.229.218.106 \
+    --env CAS_HOST=auth-test.berkeley.edu \
+    --env CAS_PORT=443 \
+    --env CLIENT_SERVICE_NAME='http://localhost' \
+    --env CAS_SKIP_SERVER_VALIDATION=true \
+    --env CAS_VERSION=3 \
+    --name cas-client \
+    ghcr.io/ucidentity/cas-php-client:latest
 ```
 
 Go to http://localhost:8000
