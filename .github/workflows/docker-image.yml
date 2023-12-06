@@ -35,7 +35,7 @@ jobs:
       contents: read
       packages: write
 
-    if: needs.check.outputs.needs-updating == 'true' || ${{ github.event_name != 'cron' }}
+    if: needs.check.outputs.needs-updating == 'true' || ${{ github.event_name != 'schedule' }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
