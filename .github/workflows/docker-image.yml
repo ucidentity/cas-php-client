@@ -6,11 +6,10 @@ on:
       - 'v**'
   workflow_dispatch:
   schedule:
-    - cron: '12 17 * * *'  # Second Tuesday of the month at 9:10 am PDT
+    - cron: '10 17 * * 2'  # Every Tuesday of the month at 9:10 am PDT
 
 env:
   REGISTRY: ghcr.io
-  #IMAGE_NAME: ${{ github.repository }}
   IMAGE_NAME: cas-php-client
   BASE_IMAGE: php:8.3-apache
 
@@ -19,14 +18,22 @@ jobs:
   check:
     runs-on: ubuntu-latest
     outputs:
-      needs-updating: ${{ steps.check.outputs.needs-updating }}
+      differs: ${{ steps.check.outputs.differs }}
     steps:
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@343f7c4344506bcbf9b4de18042ae17996df046d
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+    
       - name: Check if update available
         id: check
-        uses: lucacome/docker-image-update-checker@v1
+        uses: ClementTsang/docker-check-base-image-diff@d8cf79d3bcda38fab44bc8c9afa60c4b3dee23de
         with:
-          base-image: ${{ env.BASE_IMAGE }}
-          image: ${{ env.REGISTRY }}/ucidentity/${{ env.IMAGE_NAME }}
+          base-image: docker://${{ env.BASE_IMAGE }}
+          derived-image: docker://${{ env.REGISTRY }}/ucidentity/${{ env.IMAGE_NAME }}
 
   publish:
     needs: check
@@ -35,7 +42,8 @@ jobs:
       contents: read
       packages: write
 
-    if: needs.check.outputs.needs-updating == 'true' || ${{ github.event_name != 'schedule' }}
+    # When invoked by schedule, only build if the base image is out of date
+    if: ${{ needs.check.outputs.differs == 'true' ||  github.event_name != 'schedule' }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
