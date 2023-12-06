@@ -11,15 +11,27 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: cas-php-client
-  BASE_IMAGE: php:8.3-apache
+  BASE_IMAGE_DOCKERFILE: ./Dockerfile
 
 jobs:
 
   check:
     runs-on: ubuntu-latest
+
     outputs:
       differs: ${{ steps.check.outputs.differs }}
+
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set base image
+        run: |
+          echo "BASE_IMAGE=$(grep 'FROM' ${{ env.BASE_IMAGE_DOCKERFILE}} | awk '{print $2}')" >> "$GITHUB_ENV"
+
+      - name: Debug
+        run: |
+          echo ${{ env.BASE_IMAGE }}
 
       - name: Log in to the Container registry
         uses: docker/login-action@343f7c4344506bcbf9b4de18042ae17996df046d
