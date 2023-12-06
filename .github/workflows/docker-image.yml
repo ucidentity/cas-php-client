@@ -6,21 +6,36 @@ on:
       - 'v**'
   workflow_dispatch:
   schedule:
-    - cron: '10 17 8-14 * 2'  # Second Tuesday of the month at 9:10 am PDT
+    - cron: '05 01 * * *'  # Second Tuesday of the month at 9:10 am PDT
 
 env:
   REGISTRY: ghcr.io
   #IMAGE_NAME: ${{ github.repository }}
   IMAGE_NAME: cas-php-client
+  BASE_IMAGE: php:8.3-apache
 
 jobs:
 
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      needs-updating: ${{ steps.check.outputs.needs-updating }}
+    steps:
+      - name: Check if update available
+        id: check
+        uses: lucacome/docker-image-update-checker@sha256:cbe6ae6bded62e56edabb159c28f8d586928f51e768e417a4fbb8e87f3cc9961
+        with:
+          base-image: ${{ env.BASE_IMAGE }}
+          image: ${{ env.REGISTRY }}/ucidentity/${{ env.IMAGE_NAME }}
+
   publish:
+    needs: check
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
 
+    if: needs.check.outputs.needs-updating == 'true' || ${{ github.event_name != 'cron' }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
