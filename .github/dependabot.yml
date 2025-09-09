@@ -8,17 +8,17 @@ updates:
       interval: "weekly"
     assignees:
       - "jonnyt"
-    reviewers:
-      - "jonnyt"
-
+    ignore:
+      # ignore 8.4 until CAS library library supports it
+      - dependency-name: "php"
+        versions: [">= 8.4"]
+  
   # PHP dependencies
   - package-ecosystem: "composer"
     directory: "/src"
     schedule:
       interval: "weekly"
     assignees:
-      - "jonnyt"
-    reviewers:
       - "jonnyt"
 
   # GitHub Actions dependencies
@@ -27,6 +27,4 @@ updates:
     schedule:
       interval: "weekly"
     assignees:
-      - "jonnyt"
-    reviewers:
       - "jonnyt"
