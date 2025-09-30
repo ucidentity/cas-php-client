@@ -38,6 +38,8 @@ jobs:
           tags: |
             type=semver,pattern={{version}},latest=true
             type=semver,pattern={{major}}.{{minor}}
+        env:
+          DOCKER_METADATA_ANNOTATIONS_LEVELS: manifest,index
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -52,4 +54,8 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ steps.meta.outputs.tags }}
+          annotations: ${{ steps.meta.outputs.annotations }}
           labels: ${{ steps.meta.outputs.labels }}
+          provenance: false # Disable provenance to avoid unknown/unknown
+          sbom: false       # Disable sbom to avoid unknown/unknown
+
