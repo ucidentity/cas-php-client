@@ -1,8 +1,7 @@
 FROM php:8.5-apache@sha256:670ca5334e4c3b6ef13f70b86b542c09272795fef1653f1b774ea0f3eefd1892
 
 RUN apt-get update && apt-get -y upgrade
-RUN apt-get install -y wget
-RUN apt-get install -y git
+RUN apt-get install -y wget git unzip
 
 # Set up php composer
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
