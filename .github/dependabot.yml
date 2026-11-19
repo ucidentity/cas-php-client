@@ -14,7 +14,10 @@ updates:
       # ignore 8.4 until CAS library library supports it
       - dependency-name: "php"
         update-types: ["version-update:semver-major", "version-update:semver-minor"]
-  
+    cooldown:
+      exclude:
+        - "php"
+
   # PHP dependencies
   - package-ecosystem: "composer"
     directory: "/src"
