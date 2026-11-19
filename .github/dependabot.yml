@@ -7,7 +7,7 @@ updates:
     schedule:
       interval: "weekly"
     assignees:
-      - "jonnyt"
+      - "nanjb"
       - "griggs8"
       - "xzhangberkeley"
     ignore:
@@ -21,7 +21,7 @@ updates:
     schedule:
       interval: "weekly"
     assignees:
-      - "jonnyt"
+      - "nanjb"
       - "griggs8"
       - "xzhangberkeley"
 
@@ -31,6 +31,6 @@ updates:
     schedule:
       interval: "weekly"
     assignees:
-      - "jonnyt"
+      - "nanjb"
       - "griggs8"
       - "xzhangberkeley"
